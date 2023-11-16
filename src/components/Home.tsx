@@ -35,7 +35,7 @@ const Home = () => {
 
     // this is a function that removes a task based on index of the task
     const handleRemove = (id: number) => {
-        const newArray = tasks.filter((items, index) => index !== id);
+        const newArray = tasks.filter((items, index) => index !== id && items);
         setTasks(newArray);
     };
     // this is a function that changes the value of the task to completed or not completed

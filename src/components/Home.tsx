@@ -17,11 +17,28 @@ const Home = () => {
             urgency: false,
             category: "personal",
         },
+        {
+            title: "Cook food",
+            completed: false,
+            description: "write about what happened today in your diary",
+            urgency: false,
+            category: "personal",
+        },
+        {
+            title: "Clean House",
+            completed: false,
+            description: "write about what happened today in your diary",
+            urgency: false,
+            category: "personal",
+        },
     ]);
 
+    // this is a function that removes a task based on index of the tasl
     const handleRemove = (id: number) => {
-        console.log(id);
+        const newArray = tasks.filter((items, index) => index !== id);
+        setTasks(newArray);
     };
+
     return (
         <div className='flex flex-col gap-5 py-10 px-5'>
             <p className='text-center text-5xl font-bold'>To Do List</p>

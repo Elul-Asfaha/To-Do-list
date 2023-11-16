@@ -16,7 +16,7 @@ type taskType = {
 const Task = ({ data, id, removeHandler, completedHandler }: taskType) => {
     return (
         <div className='flex justify-between gap-5 px-2 md:px-5 py-5 shadow-sm'>
-            <div className='flex flex-col gap-2'>
+            <div className='flex flex-col w-full gap-2'>
                 <div className='flex items-center gap-3'>
                     <input
                         type='checkbox'
@@ -31,7 +31,7 @@ const Task = ({ data, id, removeHandler, completedHandler }: taskType) => {
                         <span className=''>{id + 1 + "."}</span> {data.title}
                     </p>
                 </div>
-                <div className='flex flex-col gap-2'>
+                <div className='flex justify-between gap-2'>
                     <p>
                         <span className='font-semibold'>Category: </span>
                         {data.category}

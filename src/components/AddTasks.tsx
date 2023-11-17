@@ -25,17 +25,22 @@ const AddTasks = ({
 }: AddTaskType) => {
     const categories = ["Work", "Personal", "Hobby", "Social"];
     return (
-        <div className='flex flex-col gap-5 px-5 w-full md:px-5 max-w-[600px]'>
+        <div className='flex flex-col bg-[#10123A] text-white gap-5 px-5 w-full md:px-5 max-w-[600px] py-10 rounded-md'>
             <p className='text-3xl md:text-4xl lg:text-5xl font-semibold px-5'>
                 Create New Task
             </p>
-            <Link to='/'>Back</Link>
+            <Link
+                to='/'
+                className='flex items-center gap-2 w-full max-w-fit text-white hover:bg-[#401e8a] bg-[#401e80] px-3 py-1 rounded-md shadow-md'
+            >
+                Back
+            </Link>
             <form
                 onSubmit={(e) => submitHandler(e)}
-                className='flex flex-col items-center gap-5'
+                className='flex flex-col items-center gap-5 text-black'
             >
                 <div className='flex flex-col gap-1 w-full'>
-                    <label htmlFor='title' className='font-semibold'>
+                    <label htmlFor='title' className='font-semibold text-white'>
                         Title:
                     </label>
                     <input
@@ -48,7 +53,10 @@ const AddTasks = ({
                     />
                 </div>
                 <div className='flex flex-col gap-1 w-full'>
-                    <label htmlFor='description' className='font-semibold'>
+                    <label
+                        htmlFor='description'
+                        className='font-semibold text-white'
+                    >
                         Description:
                     </label>
                     <textarea
@@ -60,7 +68,10 @@ const AddTasks = ({
                     />
                 </div>
                 <div className='flex flex-col gap-1 w-full'>
-                    <label htmlFor='category' className='font-semibold'>
+                    <label
+                        htmlFor='category'
+                        className='font-semibold text-white'
+                    >
                         Category:
                     </label>
                     <select
@@ -78,7 +89,10 @@ const AddTasks = ({
                     </select>
                 </div>
                 <div className='flex items-center gap-1 w-full'>
-                    <label htmlFor='urgency' className='font-semibold'>
+                    <label
+                        htmlFor='urgency'
+                        className='font-semibold text-white'
+                    >
                         Urgent:
                     </label>
                     <input
@@ -92,9 +106,9 @@ const AddTasks = ({
 
                 <button
                     type='submit'
-                    className='flex items-center gap-2 w-full max-w-fit text-white bg-[#20123A] px-3 py-1 rounded-md shadow-md'
+                    className='flex items-center gap-2 w-full max-w-fit text-white hover:bg-[#401e8a] bg-[#401e80] px-5 py-2 rounded-md shadow-md'
                 >
-                    submit
+                    Create Task
                 </button>
             </form>
         </div>

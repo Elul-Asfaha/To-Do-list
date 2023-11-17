@@ -29,23 +29,23 @@ const DisplayTasks = ({
         />
     ));
     return (
-        <>
+        <div className='shadow-md rounded-md p-5 min-h-[500px] min-w-[380px] w-full bg-[#10123A] text-white max-w-[600px] flex flex-col gap-5'>
             <Link
                 to='/CreateTasks'
-                className='flex items-center gap-2 w-full max-w-fit text-white bg-[#20123A] px-3 py-1 rounded-md shadow-md'
+                className='flex items-center gap-2 w-full max-w-fit text-white hover:bg-[#401e8a] bg-[#401e80] ms-5 px-3 py-1 rounded-md shadow-md'
             >
                 <span className='text-3xl'>
                     <IoAddSharp />
                 </span>
                 <p className='w-full max-w-fit text-xl'>Add Tasks</p>
             </Link>
-            <div className='flex flex-col gap-5 min-w-[320px] w-full px-3 md:px-5 max-w-[600px]'>
-                <p className='text-3xl md:text-4xl lg:text-5xl font-semibold px-5'>
+            <div className='flex flex-col gap-5 w-full px-3 md:px-5'>
+                <p className='text-3xl md:text-4xl font-semibold px-5 bg-gray-600 shadow-sm py-3 rounded-sm'>
                     Tasks
                 </p>
                 {displayList}
             </div>
-        </>
+        </div>
     );
 };
 

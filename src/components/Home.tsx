@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import DisplayTasks from "./DisplayTasks";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import AddTasks from "./AddTasks";
@@ -9,36 +9,23 @@ type TasksType = {
     urgency: boolean;
     category: string;
 }[];
+
+const getLocalItems = () => {
+    const list = localStorage.getItem("tasks");
+    if (list) {
+        return JSON.parse(list);
+    } else {
+        return [];
+    }
+};
 const Home = () => {
-    const [tasks, setTasks] = useState<TasksType>([
-        {
-            title: "write diary",
-            completed: false,
-            description: "write about what happened today in your diary",
-            urgency: false,
-            category: "personal",
-        },
-        {
-            title: "Cook food",
-            completed: false,
-            description: "write about what happened today in your diary",
-            urgency: false,
-            category: "personal",
-        },
-        {
-            title: "Clean House",
-            completed: true,
-            description: "write about what happened today in your diary",
-            urgency: true,
-            category: "personal",
-        },
-    ]);
+    const [tasks, setTasks] = useState<TasksType>(getLocalItems());
     const [newTask, setNewTask] = useState({
         title: "",
         completed: false,
         description: "",
         urgency: false,
-        category: "",
+        category: "Work",
     });
 
     // this is a function that removes a task based on index of the task
@@ -52,7 +39,6 @@ const Home = () => {
             if (index === id) return { ...obj, completed: !obj.completed };
             return obj;
         });
-
         setTasks(updatedData);
     };
 
@@ -80,7 +66,7 @@ const Home = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        tasks.push(newTask);
+        setTasks([...tasks, newTask]);
         setNewTask({
             title: "",
             completed: false,
@@ -90,6 +76,11 @@ const Home = () => {
         });
         navigate("/");
     };
+
+    //
+    useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }, [tasks]);
     return (
         <div className='flex flex-col w-full px-5 gap-5 md:gap-10 items-center py-10'>
             <p className='text-center text-3xl md:text-5xl font-bold'>

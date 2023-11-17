@@ -15,11 +15,12 @@ type taskType = {
 };
 const Task = ({ data, id, removeHandler, completedHandler }: taskType) => {
     return (
-        <div className='flex justify-between gap-5 px-2 md:px-5 py-5 shadow-sm'>
+        <div className='flex justify-between even:bg-[#401e80] odd:bg-[#101252] gap-5 px-5 py-5 rounded-md'>
             <div className='flex flex-col w-full gap-2'>
                 <div className='flex items-center gap-3'>
                     <input
                         type='checkbox'
+                        className='h-[18px] w-[18px] accent-green-600'
                         onChange={() => completedHandler(id)}
                         checked={data.completed}
                     />
@@ -46,7 +47,10 @@ const Task = ({ data, id, removeHandler, completedHandler }: taskType) => {
                     ) : null}
                 </div>
             </div>
-            <button className='h-fit' onClick={() => removeHandler(id)}>
+            <button
+                className='h-fit hover:animate-bounce'
+                onClick={() => removeHandler(id)}
+            >
                 <span className='text-2xl'>
                     <IoTrashOutline />
                 </span>

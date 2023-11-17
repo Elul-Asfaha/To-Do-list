@@ -17,3 +17,5 @@ i needed to create a way to mark the tasks as completed, in the handleCompleted 
 i wanted to create a new component to display the tasks, which makes it easier to use the react-router-dom to switch between addTasks component and display component
 
 i had to create a separate input handler for each inputs so i can clearly define what type of event i am expecting from those inputs
+
+i had trouble implementing localstorage because of the setTask in handleSubmit function located in home.tsx. it wouldnt set the localstorage with the latest state. but i fixed it by imprementing the proper way to setState

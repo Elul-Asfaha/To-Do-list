@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import DisplayTasks from "./DisplayTasks";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import AddTasks from "./AddTasks";
+import NoPage from "./NoPage";
 type TasksType = {
     title: string;
     completed: boolean;
@@ -112,6 +113,7 @@ const Home = () => {
                         />
                     }
                 />
+                <Route path='*' element={<NoPage />} />
             </Routes>
         </div>
     );

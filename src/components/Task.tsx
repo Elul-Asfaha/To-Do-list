@@ -18,10 +18,7 @@ type taskType = {
 const Task = ({ data, id, removeHandler, completedHandler }: taskType) => {
     const [toggle, setToggle] = useState(false);
     return (
-        <div
-            onClick={() => setToggle(!toggle)}
-            className='flex flex-col hover:brightness-95 cursor-pointer even:bg-[#401e80] odd:bg-[#101252] gap-5 px-5 py-3 md:py-5 rounded-md'
-        >
+        <div className='flex flex-col hover:brightness-95 cursor-pointer even:bg-[#401e80] odd:bg-[#101252] gap-2 px-3 py-3 md:py-5 rounded-md'>
             <div className='flex justify-between gap-5'>
                 <div className='flex flex-col w-full gap-2'>
                     <div className='flex items-center gap-3'>
@@ -55,12 +52,18 @@ const Task = ({ data, id, removeHandler, completedHandler }: taskType) => {
                         ) : null}
                     </div>
                 </div>
-                <button className='h-fit p-3' onClick={() => removeHandler(id)}>
+                <button className='h-fit' onClick={() => removeHandler(id)}>
                     <span className='text-2xl'>
                         <IoTrashOutline />
                     </span>
                 </button>
             </div>
+            <button
+                className='w-fit underline self-end md:me-5'
+                onClick={() => setToggle(!toggle)}
+            >
+                Show details
+            </button>
             {toggle ? <Description description={data.description} /> : null}
         </div>
     );

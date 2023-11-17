@@ -20,7 +20,7 @@ const Task = ({ data, id, removeHandler, completedHandler }: taskType) => {
     return (
         <div
             onClick={() => setToggle(!toggle)}
-            className='flex flex-col cursor-pointer even:bg-[#401e80] odd:bg-[#101252] gap-5 px-5 py-3 md:py-5 rounded-md'
+            className='flex flex-col hover:brightness-95 cursor-pointer even:bg-[#401e80] odd:bg-[#101252] gap-5 px-5 py-3 md:py-5 rounded-md'
         >
             <div className='flex justify-between gap-5'>
                 <div className='flex flex-col w-full gap-2'>

@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { IoAddSharp } from "react-icons/io5";
-import Task from "./Task";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import DisplayTasks from "./DisplayTasks";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import AddTasks from "./AddTasks";
 type TasksType = {
     title: string;
     completed: boolean;
@@ -8,30 +9,24 @@ type TasksType = {
     urgency: boolean;
     category: string;
 }[];
+
+const getLocalItems = () => {
+    const list = localStorage.getItem("tasks");
+    if (list) {
+        return JSON.parse(list);
+    } else {
+        return [];
+    }
+};
 const Home = () => {
-    const [tasks, setTasks] = useState<TasksType>([
-        {
-            title: "write diary",
-            completed: false,
-            description: "write about what happened today in your diary",
-            urgency: false,
-            category: "personal",
-        },
-        {
-            title: "Cook food",
-            completed: false,
-            description: "write about what happened today in your diary",
-            urgency: false,
-            category: "personal",
-        },
-        {
-            title: "Clean House",
-            completed: true,
-            description: "write about what happened today in your diary",
-            urgency: true,
-            category: "personal",
-        },
-    ]);
+    const [tasks, setTasks] = useState<TasksType>(getLocalItems());
+    const [newTask, setNewTask] = useState({
+        title: "",
+        completed: false,
+        description: "",
+        urgency: false,
+        category: "Work",
+    });
 
     // this is a function that removes a task based on index of the task
     const handleRemove = (id: number) => {
@@ -44,35 +39,80 @@ const Home = () => {
             if (index === id) return { ...obj, completed: !obj.completed };
             return obj;
         });
-
         setTasks(updatedData);
     };
 
-    // renders the list
-    const displayList = tasks.map((item, index) => (
-        <Task
-            key={item.title}
-            removeHandler={handleRemove}
-            completedHandler={handleCompleted}
-            id={index}
-            data={item}
-        />
-    ));
+    //this handles the new task
+    const handleNewTask = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value, name } = e.target;
+        setNewTask({ ...newTask, [name]: value });
+    };
+    const handleNewTaskTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const { value, name } = e.target;
+        setNewTask({ ...newTask, [name]: value });
+    };
+    //this handles the new task checkbox
+    const handleNewTaskCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, checked } = e.target;
+        setNewTask({ ...newTask, [name]: checked });
+    };
+    const handleNewTaskSelectOption = (e: ChangeEvent<HTMLSelectElement>) => {
+        const { value, name } = e.target;
+        setNewTask({ ...newTask, [name]: value });
+    };
+
+    // this submits new task and redirect to the display tasks route
+    const navigate = useNavigate();
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        setTasks([...tasks, newTask]);
+        setNewTask({
+            title: "",
+            completed: false,
+            description: "",
+            urgency: false,
+            category: "",
+        });
+        navigate("/");
+    };
+
+    //
+    useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }, [tasks]);
     return (
-        <div className='flex flex-col gap-5 md:gap-10 items-center py-10 px-3'>
+        <div className='flex flex-col w-full px-5 gap-5 md:gap-10 items-center py-10'>
             <p className='text-center text-3xl md:text-5xl font-bold'>
                 To Do List
             </p>
-            <button className='flex items-center gap-2 w-full max-w-fit self-end text-white bg-[#20123A] px-3 py-1 rounded-md shadow-md'>
-                <span className='text-3xl'>
-                    <IoAddSharp />
-                </span>
-                <p className='w-full max-w-fit text-xl'>Add Tasks</p>
-            </button>
-            <div className='flex flex-col gap-5 min-w-[320px] w-full px-3 md:px-5 max-w-[600px]'>
-                <p className='text-3xl md:text-5xl font-semibold px-5'>Tasks</p>
-                {displayList}
-            </div>
+            <Routes>
+                <Route
+                    path='/'
+                    element={
+                        <DisplayTasks
+                            tasks={tasks}
+                            removeHandler={handleRemove}
+                            completedHandler={handleCompleted}
+                        />
+                    }
+                />
+                <Route
+                    path='/CreateTasks'
+                    element={
+                        <AddTasks
+                            newTask={newTask}
+                            submitHandler={handleSubmit}
+                            newTaskHandler={handleNewTask}
+                            newTaskCheckboxHandler={handleNewTaskCheckbox}
+                            newTaskTextareaHandler={handleNewTaskTextarea}
+                            newTaskSelectOptionHandler={
+                                handleNewTaskSelectOption
+                            }
+                        />
+                    }
+                />
+            </Routes>
         </div>
     );
 };

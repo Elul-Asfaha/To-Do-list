@@ -64,7 +64,7 @@ const AddTasks = ({
                         onChange={newTaskTextareaHandler}
                         required
                         value={newTask.description}
-                        className='border border-black resize-none min-h-[230px] px-3 py-2'
+                        className='border border-black resize-none min-h-[150px] md:min-h-[230px] px-3 py-2'
                     />
                 </div>
                 <div className='flex flex-col gap-1 w-full'>
@@ -76,7 +76,7 @@ const AddTasks = ({
                     </label>
                     <select
                         name='category'
-                        className='border border-black p-1'
+                        className='border border-black p-2'
                         onChange={(e) => {
                             newTaskSelectOptionHandler(e);
                         }}
@@ -100,7 +100,7 @@ const AddTasks = ({
                         type='checkbox'
                         onChange={(e) => newTaskCheckboxHandler(e)}
                         checked={newTask.urgency}
-                        className='w-[15px] h-[15px]'
+                        className='w-[18px] h-[18px]'
                     />
                 </div>
 

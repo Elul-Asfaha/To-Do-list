@@ -82,8 +82,8 @@ const Home = () => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks]);
     return (
-        <div className='flex flex-col w-full px-5 gap-5 md:gap-10 items-center py-10'>
-            <p className='text-center text-3xl md:text-5xl font-bold'>
+        <div className='flex flex-col w-full md:px-5 gap-5 md:gap-10 items-center py-10'>
+            <p className='text-center text-3xl md:text-5xl font-bold font-Agbalumo'>
                 To Do List
             </p>
             <Routes>

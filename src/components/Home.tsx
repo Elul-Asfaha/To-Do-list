@@ -72,7 +72,7 @@ const Home = () => {
             completed: false,
             description: "",
             urgency: false,
-            category: "",
+            category: "Work",
         });
         navigate("/");
     };

@@ -47,10 +47,7 @@ const Task = ({ data, id, removeHandler, completedHandler }: taskType) => {
                     ) : null}
                 </div>
             </div>
-            <button
-                className='h-fit hover:animate-bounce'
-                onClick={() => removeHandler(id)}
-            >
+            <button className='h-fit p-3' onClick={() => removeHandler(id)}>
                 <span className='text-2xl'>
                     <IoTrashOutline />
                 </span>
